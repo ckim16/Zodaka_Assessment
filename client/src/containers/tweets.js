@@ -52,21 +52,21 @@ class Tweets extends Component {
   renderTweet() {
     if (this.props.tweets) {
       if (this.state.option === 'EN') {
-        return this.props.tweets.tweets.map((t, idx) => {
+        return this.props.tweets.tweets.map(t => {
           if (t.lang === 'en') {
             return (
               <TwitterTweetEmbed
-                key={idx}
+                key={t.id}
                 tweetId={t.id_str}
               />
             );
           }
         });
       } else {
-        return this.props.tweets.tweets.map((t, idx) => {
+        return this.props.tweets.tweets.map(t => {
           return (
             <TwitterTweetEmbed
-              key={idx}
+              key={t.id}
               tweetId={t.id_str}
             />
           );
