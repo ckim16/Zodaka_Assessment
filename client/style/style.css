@@ -1,0 +1,27 @@
+.jumbotron {
+  background: linear-gradient(to bottom, #eee, #aaa);
+  text-transform: uppercase;
+  color: #197fcd !important;
+}
+
+h1, p {
+  font-weight: 600 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.right {
+  float: right;
+}
+
+.right label {
+  margin-right: 10px;
+}
+
+.right i {
+  cursor: pointer;
+}
+
+twitterwidget {
+  margin-left: auto;
+  margin-right: auto;
+}

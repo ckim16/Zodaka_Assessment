@@ -18,9 +18,10 @@ class Tweets extends Component {
 
   renderTweet() {
     if (this.props.tweets) {
-      return this.props.tweets.tweets.map(t => {
+      return this.props.tweets.tweets.map((t, idx) => {
         return (
           <TwitterTweetEmbed
+            key={idx}
             tweetId={t.id_str}
           />
         );
