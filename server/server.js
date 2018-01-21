@@ -3,12 +3,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const Twitter = require('node-twitter');
+const config = require('./config.js');
 
 const twitterSearchClient = new Twitter.SearchClient(
-  '2nRVfvrrKx2tBomPsKLck72Jh',
-  '1gGjAmsGnqdmEdlIIUjOSmbxgvbPjQJx95Se0GlurwfD5Dl6wa',
-  '750932700828143616-Z58bb49iJpp7VWE73rzGjIqBu2lgga5',
-  'nf1Zz8eYREZZXvBruuuz6TYNsPrxHk6XwBGMRrRg5zLJS'
+  config.CONSUMER_KEY,
+  config.CONSUMER_SECRET,
+  config.TOKEN,
+  config.TOKEN_SECRET
 );
 
 app.use(bodyParser.json({type: '*/*'}));
@@ -28,9 +29,9 @@ app.post('/search/:key', (req, res, next) => {
  
     if (result) {
       console.log(result);
+      res.send(result);
     }
   });
-  next();
 });
 
 app.listen(port, () => {
