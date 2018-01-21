@@ -25,3 +25,20 @@ twitterwidget {
   margin-left: auto;
   margin-right: auto;
 }
+
+.btn-primary {
+  background-color: #1DA1F2 !important;
+  border-color: #1DA1F2 !important;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+label:first-child {
+  margin-left: auto !important;
+}
+
+label:last-child {
+  margin-right: auto !important;
+}
