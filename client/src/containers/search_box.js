@@ -23,16 +23,19 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <form onSubmit={this._handleSubmit.bind(this)}>
+      <form className="input-group mb-3" onSubmit={this._handleSubmit.bind(this)}>
         <input
-          placeholder="Type anything you want to find.."
+          className="form-control"
+          placeholder="Find Tweets about.."
           value={this.state.key}
           onChange={this._onChangeKey.bind(this)}
         />
-        <button type="button" className="btn btn-primary">
-          FIND{' '} 
-          <i className="fa fa-twitter" aria-hidden="true"></i>
-        </button>
+        <div className="input-group-append">
+          <button type="button" className="btn btn-primary">
+            FIND{' '} 
+            <i className="fa fa-twitter" aria-hidden="true"></i>
+          </button>
+        </div>
       </form>
     );
   }
