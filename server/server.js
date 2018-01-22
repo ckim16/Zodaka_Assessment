@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const Twitter = require('node-twitter');
 const config = require('./config.js');
 
+// setup Twitter API library with personal keys
 const twitterSearchClient = new Twitter.SearchClient(
   config.CONSUMER_KEY,
   config.CONSUMER_SECRET,
@@ -12,6 +13,7 @@ const twitterSearchClient = new Twitter.SearchClient(
   config.TOKEN_SECRET
 );
 
+// setup body parser and cors
 app.use(bodyParser.json({type: '*/*'}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(function crossOrigin(req,res,next){
@@ -20,6 +22,7 @@ app.use(function crossOrigin(req,res,next){
   return next();
 });
 
+// post request with a user input
 app.post('/search/:key', (req, res, next) => {
   const key = req.params.key; 
   twitterSearchClient.search({'q': key}, function(error, result) {
@@ -33,6 +36,7 @@ app.post('/search/:key', (req, res, next) => {
   });
 });
 
+// and app is listening on port..
 app.listen(port, () => {
   console.log('Listening on port' + port);
 });
