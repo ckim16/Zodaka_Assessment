@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'; // makes the redux store available to the connect() calls in the component hierarchy below
+import { Provider } from 'react-redux'; // makes redux store available to the connect() calls in the component hierarchy below
 import { applyMiddleware, createStore } from 'redux'; //components for building store
 import Thunk from 'redux-thunk'; // middleware
 
