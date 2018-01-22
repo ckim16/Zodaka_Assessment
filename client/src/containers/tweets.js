@@ -113,13 +113,13 @@ class Tweets extends Component {
     }
   }
 
-  _onClickLoadMore() {
+  _onClickLoadMore() { // callback for load more tweets
     this.setState({ showMore: !this.state.showMore });
   }
 
-  loadMore() {
+  loadMore() { // option for people who want to see more than 10 tweets
     if (this.props.tweets) {
-      if (this.len < 10) {
+      if (this.len <= 10) { // if found tweets are equal or less than 10, don't provide this option
         return null;
       } else if (!this.state.showMore) {
         return (<span className="more" onClick={this._onClickLoadMore.bind(this)}>Show more..</span>)
