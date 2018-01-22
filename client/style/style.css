@@ -1,7 +1,7 @@
 .jumbotron {
   background: linear-gradient(to bottom, #eee, #aaa);
   text-transform: uppercase;
-  color: #197fcd !important;
+  color: #197fcd;
 }
 
 h1, p {
