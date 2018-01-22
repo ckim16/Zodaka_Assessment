@@ -19,7 +19,7 @@ export default class Header extends Component {
   render() {
     return (
       <div className="jumbotron">
-        <h1>Zodaka Technical Assessment</h1>
+        <h1>Zodaka Technical Assignment</h1>
         <p>Zodaka Technical Assignment from Cheewoon Kim</p>      
         <div className="right">
           <label>Linkedin: <i className="fa fa-linkedin-square fa-2x" aria-hidden="true" onClick={this.onClickLinkedin}></i></label>
