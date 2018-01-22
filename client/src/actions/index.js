@@ -8,7 +8,6 @@ export function searchTweets(key) {
   return function(dispatch) {
     axios.post(`${BASE_URL}/search/${key}`, { key })
     .then(response => {
-      console.log('res', response)
       dispatch({ 
         type: SEARCH_TWEET, 
         payload: { tweets: response.data.statuses, query: response.data.search_metadata.query } 
