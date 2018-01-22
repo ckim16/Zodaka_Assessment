@@ -61,21 +61,22 @@ class Tweets extends Component {
   renderTweet() {
     if (this.props.tweets) { // only render tweets when tweets object is defined
       // sort the array by created time then slice it down to length of 10
-      const firstTenTweets = this.props.tweets.tweets.sort(function(a, b) {
-        return new Date(b.created_at) - new Date(a.created_at);
-      }).slice(0, 10);
-
+      let firstTen = this.props.tweets.tweets;
+      let { rest } = this.props.tweets;
+      let displayArr = this.state.showMore ? firstTen.concat(rest) : firstTen;
       if (this.state.option === 'EN') { // if a user wants to see only Engligh tweets
-        let enTweets = firstTenTweets.map(t => {
-          if (t.lang === 'en') {
-            return (
-              <TwitterTweetEmbed
-                key={t.id}
-                tweetId={t.id_str}
-              />
-            );
-          }
+        let enArr = displayArr.filter(arr => { // loop through the entire tweets array and filter if lang property has value of 'en'
+          return arr.lang === 'en';
         });
+        let enTweets = enArr.map(t => { // loop through the filtered array to create twitter card
+          return (
+            <TwitterTweetEmbed
+              key={t.id}
+              tweetId={t.id_str}
+            />
+          );
+        });
+        this.len = enTweets.length;
         return (
           <CSSTransitionGroup
             transitionName="tweet"
@@ -88,7 +89,7 @@ class Tweets extends Component {
           </CSSTransitionGroup>
         );
       } else { // render first ten tweets
-        let allTweets = firstTenTweets.map(t => {
+        let allTweets = displayArr.map(t => { // loop throught the entire tweets array and create twitter card
           return (
             <TwitterTweetEmbed
               key={t.id}
@@ -96,6 +97,7 @@ class Tweets extends Component {
             />
           );
         });
+        this.len = allTweets.length;
         return (
           <CSSTransitionGroup
             transitionName="tweet"
@@ -111,12 +113,29 @@ class Tweets extends Component {
     }
   }
 
+  _onClickLoadMore() {
+    this.setState({ showMore: !this.state.showMore });
+  }
+
+  loadMore() {
+    if (this.props.tweets) {
+      if (this.len < 10) {
+        return null;
+      } else if (!this.state.showMore) {
+        return (<span className="more" onClick={this._onClickLoadMore.bind(this)}>Show more..</span>)
+      } else if (this.state.showMore) {
+        return (<span className="more" onClick={this._onClickLoadMore.bind(this)}>Show less..</span>)
+      }
+    }
+  }
+
   render() {
     return (
       <div className="tweets">
         {this.searchTerm()}
         {this.searchOptions()}
         {this.renderTweet()}
+        {this.loadMore()}
       </div>
     );
   }

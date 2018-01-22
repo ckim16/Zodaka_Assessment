@@ -69,3 +69,9 @@ label:last-child {
   opacity: 1;
   transition: opacity .5s ease-in;
 }
+
+.more {
+  float: right;
+  color: #1DA1F2;
+  cursor: pointer; 
+}
