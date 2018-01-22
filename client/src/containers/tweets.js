@@ -18,8 +18,11 @@ class Tweets extends Component {
   searchTerm() {
     if (this.props.tweets) { // only render this term when tweets object is defined
       const { query } = this.props.tweets
+      if (this.props.tweets.tweets.length === 0) { // if there is no tweet about the search term
+        return (<h2 className="noTweets">No Tweets for "{query}"</h2>);
+      } 
       return (
-        <h2>Tweets for "{this.props.tweets.query}"</h2>
+        <h2>Tweets for "{query}"</h2>
       );
     }
   }
@@ -27,11 +30,11 @@ class Tweets extends Component {
   searchOptions() {
     // radio button component for rendering all tweets for EN tweets only
     if (this.props.tweets) { // only render options when tweets object is defined
+      if (this.props.tweets.tweets.length === 0) { // if there is no tweet about the search term
+        return null;
+      } 
       let all_class = (this.state.option === 'EN') ? 'btn btn-secondary' : 'btn btn-secondary active';
       let en_class = (this.state.option === 'EN') ? 'btn btn-secondary active' : 'btn btn-secondary';
-      if (this.props.tweets.tweets.length === 0) { // if there is no tweet about the search term
-        return (<div>Try with different search term</div>);
-      } 
       return (
         <div className="btn-group btn-group-toggle" data-toggle="buttons">
           <label className={all_class}>
