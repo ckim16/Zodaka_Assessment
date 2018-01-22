@@ -60,7 +60,7 @@ class Tweets extends Component {
 
   renderTweet() {
     if (this.props.tweets) { // only render tweets when tweets object is defined
-      // sort the array in terms of 'created_at' then slice it down to length of 10
+      // sort the array by created time then slice it down to length of 10
       const firstTenTweets = this.props.tweets.tweets.sort(function(a, b) {
         return new Date(b.created_at) - new Date(a.created_at);
       }).slice(0, 10);
