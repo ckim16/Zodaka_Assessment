@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux'; // library that connects your action event with dispatch
 
 import { searchTweets } from '../actions/index';
 
@@ -11,11 +11,11 @@ class SearchBox extends Component {
     this.state = { key: '' };
   }
 
-  _onChangeKey(e) {
+  _onChangeKey(e) { // callback for input change
     this.setState({ key: e.target.value });
   }
 
-  _handleSubmit(e) {
+  _handleSubmit(e) { // callback for form submit
     e.preventDefault();
     this.props.searchTweets(this.state.key);
     this.setState({ key: '' });
@@ -41,8 +41,10 @@ class SearchBox extends Component {
   }
 }
 
+// utility which will help your component to fire an action event (dispatching action which may cause change of application state)
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ searchTweets }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SearchBox);
+// connect every redux methods with your component
+export default connect(null, mapDispatchToProps)(SearchBox); 
