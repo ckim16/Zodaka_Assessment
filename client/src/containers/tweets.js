@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 class Tweets extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { option: '' };
+    this.state = { option: '', showMore: false };
   }
 
   _onOptionChange(option) {
+    // callback from radio button component
     this.setState({ option });
   }
 
@@ -23,6 +25,7 @@ class Tweets extends Component {
   }
 
   searchOptions() {
+    // radio button component for rendering all tweets for EN tweets only
     if (this.props.tweets) {
       let all_class = (this.state.option === 'EN') ? 'btn btn-secondary' : 'btn btn-secondary active';
       let en_class = (this.state.option === 'EN') ? 'btn btn-secondary active' : 'btn btn-secondary'; 
@@ -51,8 +54,13 @@ class Tweets extends Component {
 
   renderTweet() {
     if (this.props.tweets) {
-      if (this.state.option === 'EN') {
-        return this.props.tweets.tweets.map(t => {
+      // sort the array in terms of 'created_at' then slice it down to length of 10
+      const firstTenTweets = this.props.tweets.tweets.sort(function(a, b) {
+        return new Date(b.created_at) - new Date(a.created_at);
+      }).slice(0, 10);
+
+      if (this.state.option === 'EN') { // if a user wants to see only Engligh tweets
+        let enTweets = firstTenTweets.map(t => {
           if (t.lang === 'en') {
             return (
               <TwitterTweetEmbed
@@ -62,8 +70,19 @@ class Tweets extends Component {
             );
           }
         });
-      } else {
-        return this.props.tweets.tweets.map(t => {
+        return (
+          <CSSTransitionGroup
+            transitionName="tweet"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={700} 
+            transitionLeaveTimeout={500}
+          >
+            {enTweets}
+          </CSSTransitionGroup>
+        );
+      } else { // render first ten tweets
+        let allTweets = firstTenTweets.map(t => {
           return (
             <TwitterTweetEmbed
               key={t.id}
@@ -71,6 +90,17 @@ class Tweets extends Component {
             />
           );
         });
+        return (
+          <CSSTransitionGroup
+            transitionName="tweet"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={700} 
+            transitionLeaveTimeout={500}
+          >
+            {allTweets}
+          </CSSTransitionGroup>
+        );
       }
     }
   }
