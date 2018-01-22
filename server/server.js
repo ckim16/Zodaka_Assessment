@@ -28,7 +28,6 @@ app.post('/search/:key', (req, res, next) => {
     }
  
     if (result) {
-      console.log(result);
       res.send(result);
     }
   });
