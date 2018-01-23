@@ -1,5 +1,5 @@
 # Zodaka_Assessment
-Zodaka technical assessment
+Zodaka technical assessment by Cheewoon Kim
 
 # Instruction
 You need your own CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET from Twitter. If you don't have one, please let me know and I will share mine (I have secured mine by putting in a file that is gitignored).<br/>
