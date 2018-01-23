@@ -17,7 +17,8 @@ class Tweets extends Component {
 
   searchTerm() {
     if (this.props.tweets) { // only render this term when tweets object is defined
-      const { query } = this.props.tweets
+      let { query } = this.props.tweets;
+      query = query.replace(/\+/g,' '); // remove '+' when multiple words are typed with space
       if (this.props.tweets.tweets.length === 0) { // if there is no tweet about the search term
         return (<h2 className="noTweets">No Tweets for "{query}"</h2>);
       } 
@@ -68,7 +69,7 @@ class Tweets extends Component {
         let enArr = displayArr.filter(arr => { // loop through the entire tweets array and filter if lang property has value of 'en'
           return arr.lang === 'en';
         });
-        let enTweets = enArr.map(t => { // loop through the filtered array to create twitter card
+        let enTweets = enArr.map(t => { // loop through the filtered array to create twitter cards
           return (
             <TwitterTweetEmbed
               key={t.id}
@@ -89,7 +90,7 @@ class Tweets extends Component {
           </CSSTransitionGroup>
         );
       } else { // render first ten tweets
-        let allTweets = displayArr.map(t => { // loop throught the entire tweets array and create twitter card
+        let allTweets = displayArr.map(t => { // loop throught the entire tweets array and create twitter cards
           return (
             <TwitterTweetEmbed
               key={t.id}
