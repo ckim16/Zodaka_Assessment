@@ -13,7 +13,7 @@ const twitterSearchClient = new Twitter.SearchClient(
   config.TOKEN_SECRET
 );
 
-// setup body parser and cors
+// setup body parser for client-side user input (post request) and cors
 app.use(bodyParser.json({type: '*/*'}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(function crossOrigin(req,res,next){
