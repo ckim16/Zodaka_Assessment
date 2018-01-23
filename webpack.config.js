@@ -1,6 +1,6 @@
 module.exports = {
   entry: './client/src/index.js', // entry file for webpack
-  output: { // output filename with path
+  output: { // output filename with path that output file is going to be created
     path: __dirname,
     filename: 'bundle.js'
   },
@@ -10,7 +10,7 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
-  devServer: { // serve client folder
-    contentBase: './client'
+  devServer: { 
+    contentBase: './client' // serve client folder
   }
 };
