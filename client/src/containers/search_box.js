@@ -16,7 +16,7 @@ class SearchBox extends Component {
   }
 
   _handleSubmit(e) { // callback for form submit
-    e.preventDefault();
+    e.preventDefault(); // prevent the page from refreshing
     this.props.searchTweets(this.state.key);
     this.setState({ key: '' });
   }
